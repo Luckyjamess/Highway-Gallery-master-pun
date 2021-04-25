@@ -14,6 +14,23 @@ export default {
     Video,
     Navbar
   },
+  created() {
+    this.user = this.$store.getters.user
+  },
+  data() {
+    return {
+      name: "",
+      email:"",
+      user:""
+      
+    }
+  },
+  mounted(){
+    // this.user = this.$store.getters.user
+    if (this.user == "") {
+      window.location = "#/login"
+    }
+  }
 
 }
 </script>
