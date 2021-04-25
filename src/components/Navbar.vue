@@ -23,14 +23,16 @@
           <div class="nav-link">{{ user }}</div>
         </li>
         <li class="nav-item active">
-          <router-link to="/photos" class="nav-link">Photo</router-link>
+          <router-link to="/photos" class="nav-link" >Photo</router-link>
         </li>
         <li class="nav-item active">
           <router-link to="/video" class="nav-link">Video</router-link>
         </li>
         <li class="nav-item active">
-          <router-link to="/" class="nav-link">Logout</router-link>
-          <!-- <a class="nav-link disabled" href="/">Logout</a> -->
+          <!-- <router-link to="/" class="nav-link">Logout</router-link> -->
+          <!-- <div >Logout</div> -->
+          <a class="nav-link" v-if="user != ''" @click="logout">#Logout</a>
+          <!-- <a class="nav-link" v-if="user != ''" @click="logout">#Logout</a> -->
         </li>
       </ul>
     </div>
@@ -56,6 +58,13 @@ export default {
     // this.user = this.$store.getters.user
     this.user = this.$store.getters.user
   },
+   methods: {
+     logout(){
+        this.$store.dispatch("getUsername",null)
+        window.location = "#/login"
+     }
+
+   }
 };
 </script>
 
