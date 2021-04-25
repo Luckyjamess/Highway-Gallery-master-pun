@@ -8,6 +8,7 @@ export default new Vuex.Store({
   state: {
     images: [],
     search: null,
+    searchVideo: null,
     user: "",
     video: [],
 
@@ -16,6 +17,7 @@ export default new Vuex.Store({
   getters: {
     allImage: (state) => state.images,
     searchImage: (state) => state.search,
+    searchVideo: (state) => state.searchVideo,
     allVideo: (state) => state.video,
     user:(state) => state.user
   },
@@ -23,6 +25,9 @@ export default new Vuex.Store({
   mutations: {
     GET_PHOTO(state, photo) {
       state.images = photo;
+    },
+    SEARCH_VIDEO(state, keyword) {
+      state.searchVideo = keyword;
     },
     SEARCH_PHOTO(state, keyword) {
       state.search = keyword;
@@ -33,6 +38,7 @@ export default new Vuex.Store({
     GET_VIDEO(state, video) {
       state.video = video;
     },
+    
   },
 
   actions: {
@@ -62,6 +68,15 @@ export default new Vuex.Store({
         )
         .then((response) => {
           commit("GET_VIDEO", response.data);
+        }); 
+    },
+    async getSearchVideo({ commit }, topic) {
+      await axios
+        .get(
+          `https://pixabay.com/api/videos/?key=21144761-09d327287137151053000093b&q=${topic}`
+        )
+        .then((response) => {
+          commit("SEARCH_VIDEO", response.data);
         }); 
     },
     getUsername({ commit },username){
