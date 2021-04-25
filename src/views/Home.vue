@@ -18,7 +18,6 @@ export default {
     Navbar
   },
   created() {
-    
     this.user = this.$store.getters.user
   },
   data() {

@@ -23,16 +23,17 @@
           <div class="nav-link">{{ user }}</div>
         </li>
         <li class="nav-item active">
-          <router-link to="/photos" class="nav-link" >Photo</router-link>
+          <a class="nav-link" v-if="user != ''" @click="pagePhoto">Photo</a>
+          <!-- <router-link to="/photos" class="nav-link" >Photo</router-link> -->
         </li>
         <li class="nav-item active">
-          <router-link to="/video" class="nav-link">Video</router-link>
+          <a class="nav-link" v-if="user != ''" @click="pageVideo">Video</a>
+          <!-- <router-link to="/video" class="nav-link">Video</router-link> -->
         </li>
         <li class="nav-item active">
           <!-- <router-link to="/" class="nav-link">Logout</router-link> -->
           <!-- <div >Logout</div> -->
-          <a class="nav-link" v-if="user != ''" @click="logout">#Logout</a>
-          <!-- <a class="nav-link" v-if="user != ''" @click="logout">#Logout</a> -->
+          <a class="nav-link" v-if="user != ''" @click="logout">Logout</a>
         </li>
       </ul>
     </div>
@@ -57,12 +58,24 @@ export default {
   mounted() {
     // this.user = this.$store.getters.user
     this.user = this.$store.getters.user
+    // if (this.user == null) {
+    //   window.location = "#/login"
+    // }
   },
    methods: {
+
      logout(){
         this.$store.dispatch("getUsername",null)
         window.location = "#/login"
-     }
+     },
+     pagePhoto(){
+        //this.$store.dispatch("getUsername",this.username)
+        window.location = "#/photos"
+     },
+     pageVideo(){
+        //this.$store.dispatch("getUsername",this.username)
+        window.location = "#/video"
+     },
 
    }
 };
